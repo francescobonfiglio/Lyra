@@ -24,5 +24,17 @@ export class UserService {
   create(dto: CreateUserDto): Promise<User> {
     const user = this.repo.create(dto);
     return this.repo.save(user);
+    
   }
+  async findByEmail(email: string): Promise<User | undefined> {
+  return this.repo.findOneBy({ email });
+}
+
+  async findByEmailOrUsername(email: string, username: string): Promise<User | undefined> {
+  return this.repo
+    .createQueryBuilder('user')
+    .where('user.email = :email OR user.username = :username', { email, username })
+    .getOne();
+  }
+
 }

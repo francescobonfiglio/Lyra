@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Param, Body, ParseIntPipe } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CoursesService } from './courses.service';
+import { CreateCoursesDto } from './dto/create-courses.dto';
 
-@Controller('users')
-export class UserController {
-  constructor(private readonly service: UserService) {}
+@Controller('courses')
+export class CoursesController {
+  constructor(private readonly service: CoursesService) {}
 
   @Get()
   findAll() {
@@ -17,7 +17,7 @@ export class UserController {
   }
 
   @Post()
-  create(@Body() dto: CreateUserDto) {
+  create(@Body() dto: CreateCoursesDto) {
     return this.service.create(dto);
   }
 }
